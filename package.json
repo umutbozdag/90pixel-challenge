@@ -5,9 +5,20 @@
     "start": "next start"
   },
   "dependencies": {
+    "axios": "^0.19.2",
+    "bootstrap": "^4.4.1",
+    "isomorphic-unfetch": "^3.0.0",
+    "mobx": "^5.15.4",
+    "mobx-react": "^6.2.2",
+    "movie-trailer": "^2.0.6",
     "next": "latest",
     "react": "^16.7.0",
+    "react-bootstrap": "^1.0.0",
     "react-dom": "^16.7.0",
     "sass": "1.26.3"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.8.3",
+    "@babel/plugin-proposal-decorators": "^7.8.3"
   }
 }
