@@ -8,27 +8,18 @@ import movieStore from "../store/movieStore";
 export default class Favorites extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      favorites: [],
-    };
   }
   componentDidMount() {
     movieStore.favorites = JSON.parse(localStorage.getItem("favorites"));
-
-    // get from store instead of storage. in the store get from storage.
-    // let favorites = JSON.parse(localStorage.getItem("favorites"));
-    console.log("FAV FROM LOCAL", movieStore.favorites);
-    this.setState({ favorites: movieStore.favorites });
+    console.log([...movieStore.favorites]);
   }
-
   render() {
-    const { favorites } = this.state;
     return (
       <div>
         <Nav />
         <Container>
-          Favorites
-          <Movies movies={favorites} />
+          <h3 className="mt-4 mb-4">Your Favorites</h3>
+          <Movies movies={[...movieStore.favorites]} />
         </Container>
       </div>
     );
