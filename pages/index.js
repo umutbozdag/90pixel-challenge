@@ -10,34 +10,17 @@ import Nav from "../components/Navbar/Navbar";
 export default class Index extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      year: "",
-      input: "",
-      type: "movie",
-    };
   }
-
-  onChange = (e) => {
-    this.setState({
-      input: e.target.value,
-    });
-  };
-
-  searchMovies = async () => {
-    await movieStore.addToSearchList(
-      this.state.input,
-      this.state.year,
-      this.state.type
-    );
-  };
 
   render() {
     return (
-      <div>
+      <div className="app">
         <Nav />
         <Container>
-          <h1>Explore</h1>
-          <Search onChange={this.onChange} searchMovies={this.searchMovies} />
+          <h1 className="mt-3 mb-4 text-center">
+            Explore movies, series, <wbr /> episodes
+          </h1>
+          <Search />
           <Movies movies={[...movieStore.searchResult]}></Movies>
         </Container>
       </div>
