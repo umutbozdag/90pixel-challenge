@@ -5,7 +5,6 @@
     "start": "next start"
   },
   "dependencies": {
-    "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "isomorphic-unfetch": "^3.0.0",
     "mobx": "^5.15.4",
