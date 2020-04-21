@@ -1,26 +1,18 @@
 $white: #fff;
-$yellow: #fabf53;
+$yellow: #f6b438;
 $red: #fa5353;
-$green: #2de92d;
+$green: #28f028;
+$gray: gray;
 
 .card {
-  width: 310px;
-  height: 520px;
-  margin-bottom: 32px;
-  margin-right: 12px;
-  border-radius: 4px;
-  box-shadow: 1px 1px 10px 0px rgba(0, 0, 0, 0.55);
-  cursor: pointer;
+  width: 20rem;
+  height: 600px;
+  box-shadow: 2px 2px 18px 1px rgba(0, 0, 0, 0.2);
   position: relative;
-
   &:hover {
-    transform: scale(1.02);
-    transition: all 0.4s ease;
+    transform: scale(1.01);
+    transition: all 0.2s ease;
   }
-}
-
-.cardBody {
-  padding: 8px;
 }
 
 .cardImage {
@@ -32,21 +24,19 @@ $green: #2de92d;
 }
 
 .cardTitle {
-  font-size: 24px;
-  margin-top: 8px;
-}
-
-.cardText {
-  font-size: 14px;
+  font-size: 20px;
 }
 
 .cardRating {
   position: absolute;
   top: -14px;
   right: -18px;
-  border-radius: 50%;
+  border-radius: 32px;
+  width: 45px;
+  height: 45px;
   padding: 9px;
   color: $white;
+  text-align: center;
 }
 
 .yellow {
@@ -59,4 +49,23 @@ $green: #2de92d;
 
 .green {
   background: $green;
+}
+
+.gray {
+  background: $gray;
+}
+
+.year {
+  font-weight: 800;
+}
+
+.favButton {
+  background: none;
+  border: none;
+  outline: none;
+  i {
+    color: red;
+    font-size: 18px;
+    outline: none;
+  }
 }
