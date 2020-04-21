@@ -1,8 +1,10 @@
-import { computed, observable } from "mobx";
+import { computed, observable, action } from "mobx";
 
 class MovieStore {
   @observable searchResult = [];
   @observable favorites = [];
+  @observable loading = false;
+  @observable error = "";
 
   @computed get getSearchResult() {
     return this.searchResult;
@@ -12,40 +14,53 @@ class MovieStore {
     return this.favorites;
   }
 
+  @computed get isLoading() {
+    return this.loading;
+  }
+
   pushItemToSearchList = (item) => this.searchResult.push(item);
 
   setSearchResult = (payload) => (this.searchResult = payload);
 
   setFavList = (payload) => (this.favorites = payload);
 
+  setError = (payload) => (this.error = payload);
+
+  setLoading = (payload) => (this.loading = payload);
+
   removeFromFav = (movie) => {
-    console.log("REMOVE");
     this.setFavList(this.getFavList.filter((x) => x.imdbID !== movie.imdbID));
     localStorage.setItem("favorites", JSON.stringify(this.favorites));
   };
 
   addToFav = (movie) => {
-    this.favorites.push({ ...movie, isFav: true });
+    this.favorites.push(movie);
     this.setSearchResult(
       this.getSearchResult.filter((x) => x.imdbID !== movie.imdbID)
     );
     localStorage.setItem("favorites", JSON.stringify(this.favorites));
-    // let favorites = JSON.parse(localStorage.getItem("favorites"));
-    // localStorage.setItem("favorites", JSON.stringify(this.favorites));
-    // this.setSearchResult(
-    //   this.getSearchResult.filter((x) => x.imdbID !== movie.imdbID)
-    // );
   };
 
   addToSearchList = async (title, year, type) => {
     this.setSearchResult([]);
-
-    fetch(`https://www.omdbapi.com/?s=${title}&apikey=6d0bdde0`)
+    this.setLoading(true);
+    fetch(
+      `https://www.omdbapi.com/?s=${title}&y=${year}&type=${type}&apikey=6d0bdde0`
+    )
       .then((res) => res.json())
       .then((result) => {
+        if (result.Response === "False") {
+          this.setError(result.Error);
+          this.setLoading(false);
+          return;
+        }
         return result;
       })
       .then((result) => {
+        if (result.Search === undefined) {
+          this.setError("Error");
+          return;
+        }
         result.Search.forEach((movie) => {
           fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=6d0bdde0`)
             .then((res) => res.json())
@@ -63,6 +78,7 @@ class MovieStore {
               });
             });
         });
+        this.setLoading(false);
       })
       .catch((err) => console.log(err));
   };
