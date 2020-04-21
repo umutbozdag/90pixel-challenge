@@ -13,11 +13,9 @@ export default function Navi() {
       <Navbar.Toggle aria-controls="responsive-navbar-nav" />
       <Navbar.Collapse id="responsive-navbar-nav">
         <Nav className="mr-auto">
-          <Nav.Link>
-            <Link href="/favorites">
-              <a className={styles.link}>Favorites</a>
-            </Link>
-          </Nav.Link>
+          <Link href="/favorites">
+            <a className={styles.link}>Favorites</a>
+          </Link>
         </Nav>
         <Nav>
           <Nav.Link href="#">Another Nav</Nav.Link>
