@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./movie-card.module.scss";
-import { Card, Button } from "react-bootstrap";
+import { Card, Button, Container } from "react-bootstrap";
 import { observer } from "mobx-react";
 import movieStore from "../../store/movieStore";
 
@@ -17,6 +17,7 @@ export default class MovieCard extends React.Component {
   ratingStyle = (rating) => {
     if (rating >= 7.5) return styles.green;
     else if (rating > 5 && rating < 7.5) return styles.yellow;
+    else if (rating === "N/A") return styles.gray;
     else return styles.red;
   };
 
@@ -24,31 +25,56 @@ export default class MovieCard extends React.Component {
     const { title, poster, year, imdbID, rating, isFav } = this.props.movie;
     const { movie } = this.props;
     return (
-      <div>
-        <div className={styles.card}>
-          <img className={styles.cardImage} src={poster} alt="" />
-          <div className={styles.cardBody}>
-            <h2 className={styles.cardTitle}>{title}</h2>
-            <p className={styles.cardText}>Lorem ipsum dolor sit amet.</p>
-            <div className={`${styles.cardRating} ${this.ratingStyle(rating)}`}>
-              {rating}
-            </div>
-            <button>
+      <Container>
+        <Card className={`${styles.card} mb-5`}>
+          <Card.Img
+            className={styles.cardImage}
+            variant="top"
+            src={
+              poster !== "N/A"
+                ? poster
+                : "https://748073e22e8db794416a-cc51ef6b37841580002827d4d94d19b6.ssl.cf3.rackcdn.com/not-found.png"
+            }
+          />
+          <Card.Body>
+            <Card.Title className={styles.cardTitle}>{title}</Card.Title>
+            <Card.Text>
+              <span>{year}</span>
+            </Card.Text>
+            <Card.Text>
+              <span>
+                <span
+                  className={`${this.ratingStyle(rating)} ${styles.cardRating}`}
+                >
+                  {rating}
+                </span>
+              </span>
+            </Card.Text>
+            <div className="d-flex justify-content-between">
+              <Link href="/movie/[id]" as={`/movie/${imdbID}`}>
+                <a>
+                  <Button variant="primary">Details</Button>
+                </a>
+              </Link>
               {isFav ? (
-                <i
-                  onClick={() => this.removeFromFav(movie)}
-                  class="fas fa-star"
-                ></i>
+                <button
+                  className={styles.favButton}
+                  onClick={() => this.removeFromFav({ ...movie, isFav: false })}
+                >
+                  <i className="fas fa-heart"></i>
+                </button>
               ) : (
-                <i
-                  onClick={() => this.addToFav(movie)}
-                  className="far fa-star"
-                ></i>
+                <button
+                  className={styles.favButton}
+                  onClick={() => this.addToFav({ ...movie, isFav: true })}
+                >
+                  <i className="far fa-heart"></i>
+                </button>
               )}
-            </button>
-          </div>
-        </div>
-      </div>
+            </div>
+          </Card.Body>
+        </Card>
+      </Container>
     );
   }
 }
