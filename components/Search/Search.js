@@ -22,9 +22,8 @@ export default class Search extends React.Component {
 
   searchMovies = async () => {
     const { input, year, type } = this.state;
-    if (year !== "" && input === "") return;
+    if (input === "") return;
 
-    // if (input === "" && year === "") return;
     console.log(input);
     await movieStore.addToSearchList(input, year, type);
   };
@@ -38,6 +37,7 @@ export default class Search extends React.Component {
               <Row className="text-center">
                 <Col sm={4}>
                   <Form.Control
+                    required
                     onChange={this.onChange}
                     placeholder="Title"
                     name="input"
@@ -45,6 +45,7 @@ export default class Search extends React.Component {
                 </Col>
                 <Col sm={4}>
                   <Form.Control
+                    type="number"
                     onChange={this.onChange}
                     name="year"
                     placeholder="Year"
