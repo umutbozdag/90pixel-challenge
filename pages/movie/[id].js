@@ -4,6 +4,7 @@ import { observer } from "mobx-react";
 import movieTrailer from "movie-trailer";
 import { Container, Row, Col } from "react-bootstrap";
 import "./movie-detail.module.scss";
+import styles from "./movie-detail.module.scss";
 @observer
 export default class Movie extends React.Component {
   constructor(props) {
@@ -22,7 +23,50 @@ export default class Movie extends React.Component {
             </Col>
             <Col sm={4} md={8} className="mt-5">
               <h2>{this.props.movie.title}</h2>
-              <p>{this.props.movie.plot}</p>
+              <p>
+                <span>Plot: </span> {this.props.movie.plot}
+              </p>
+              <Row>
+                <Col>
+                  <p>
+                    <span> Genre: </span> {this.props.movie.genre}
+                  </p>
+                </Col>
+                <Col>
+                  <p>
+                    <span> Time: </span> {this.props.movie.time}
+                  </p>
+                </Col>
+              </Row>
+              <p>
+                <span>Rating: </span>
+                {this.props.movie.rating}
+              </p>
+
+              <p>
+                <span>Director: </span>
+                {this.props.movie.director}
+              </p>
+
+              <p>
+                <span>Country: </span>
+                {this.props.movie.country}
+              </p>
+
+              <p>
+                <span>Type: </span>
+                {this.props.movie.type}
+              </p>
+
+              <div className={styles.actors}>
+                Actors:
+                {this.props.movie &&
+                  this.props.movie.actors.map((actor, i) => (
+                    <p className={styles.actor} key={i}>
+                      {actor}
+                    </p>
+                  ))}
+              </div>
             </Col>
           </Row>
         </Container>
@@ -49,6 +93,8 @@ Movie.getInitialProps = async ({ query }) => {
         actors: result.Actors.split(", "),
         poster: result.Poster,
         plot: result.Plot,
+        director: result.Director,
+        country: result.Country,
       };
       return movieDetail;
     });
