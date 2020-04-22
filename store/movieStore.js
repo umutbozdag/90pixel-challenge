@@ -1,5 +1,5 @@
 import { computed, observable, action } from "mobx";
-
+import { API_KEY } from "../service/api";
 class MovieStore {
   @observable searchResult = [];
   @observable favorites = [];
@@ -45,7 +45,7 @@ class MovieStore {
     this.setSearchResult([]);
     this.setLoading(true);
     fetch(
-      `https://www.omdbapi.com/?s=${title}&y=${year}&type=${type}&apikey=6d0bdde0`
+      `https://www.omdbapi.com/?s=${title}&y=${year}&type=${type}&apikey=${API_KEY}`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -57,12 +57,8 @@ class MovieStore {
         return result;
       })
       .then((result) => {
-        if (result.Search === undefined) {
-          this.setError("Error");
-          return;
-        }
         result.Search.forEach((movie) => {
-          fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=6d0bdde0`)
+          fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${API_KEY}`)
             .then((res) => res.json())
             .then((result) => {
               this.searchResult.push({
@@ -80,7 +76,10 @@ class MovieStore {
         });
         this.setLoading(false);
       })
-      .catch((err) => console.log(err));
+      .catch((err) => {
+        console.log(err);
+        this.setError(err);
+      });
   };
 }
 
