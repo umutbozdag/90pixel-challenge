@@ -1,6 +1,11 @@
 import "../styles/style.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Head from "next/head";
+import App from "next/app";
+import "react-toastify/dist/ReactToastify.css";
+import { toast } from "react-toastify";
+
+toast.configure();
 
 function MyApp({ Component, pageProps }) {
   return (
@@ -21,5 +26,10 @@ function MyApp({ Component, pageProps }) {
     </div>
   );
 }
+
+MyApp.getInitialProps = async (appContext) => {
+  const appProps = await App.getInitialProps(appContext);
+  return { ...appProps };
+};
 
 export default MyApp;
