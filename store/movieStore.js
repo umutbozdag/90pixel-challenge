@@ -35,12 +35,12 @@ class MovieStore {
 
   setTotalResult = (payload) => (this.totalResult = payload);
 
-  removeFromFav = (movie) => {
+  @action removeFromFav = (movie) => {
     this.setFavList(this.getFavList.filter((x) => x.imdbID !== movie.imdbID));
     localStorage.setItem("favorites", JSON.stringify(this.favorites));
   };
 
-  addToFav = (movie) => {
+  @action addToFav = (movie) => {
     this.favorites.push(movie);
     this.setSearchResult(
       this.getSearchResult.filter((x) => x.imdbID !== movie.imdbID)
@@ -48,7 +48,7 @@ class MovieStore {
     localStorage.setItem("favorites", JSON.stringify(this.favorites));
   };
 
-  addToSearchList = async (title, year, type, page) => {
+  @action addToSearchList = async (title, year, type, page) => {
     this.setSearchResult([]);
     this.setLoading(true);
     fetch(
