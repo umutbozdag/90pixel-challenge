@@ -5,6 +5,11 @@ class MovieStore {
   @observable favorites = [];
   @observable loading = false;
   @observable error = "";
+  @observable totalResult = 0;
+
+  @computed get getTotalResult() {
+    return this.totalResult;
+  }
 
   @computed get getSearchResult() {
     return this.searchResult;
@@ -28,6 +33,8 @@ class MovieStore {
 
   setLoading = (payload) => (this.loading = payload);
 
+  setTotalResult = (payload) => (this.totalResult = payload);
+
   removeFromFav = (movie) => {
     this.setFavList(this.getFavList.filter((x) => x.imdbID !== movie.imdbID));
     localStorage.setItem("favorites", JSON.stringify(this.favorites));
@@ -41,11 +48,11 @@ class MovieStore {
     localStorage.setItem("favorites", JSON.stringify(this.favorites));
   };
 
-  addToSearchList = async (title, year, type) => {
+  addToSearchList = async (title, year, type, page) => {
     this.setSearchResult([]);
     this.setLoading(true);
     fetch(
-      `https://www.omdbapi.com/?s=${title}&y=${year}&type=${type}&apikey=${API_KEY}`
+      `https://www.omdbapi.com/?s=${title}&y=${year}&type=${type}&page=${page}&apikey=${API_KEY}`
     )
       .then((res) => res.json())
       .then((result) => {
@@ -54,6 +61,8 @@ class MovieStore {
           this.setLoading(false);
           return;
         }
+        this.totalResult = result.totalResults;
+        console.log(result);
         return result;
       })
       .then((result) => {
