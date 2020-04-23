@@ -23,14 +23,11 @@ export default function Movies(props) {
         </Row>
       </Container>
       <Container>
-        <Row
-          className="d-flex justify-content-center"
-          style={{ marginLeft: 0, marginRight: 0 }}
-        >
+        <Row className="d-flex justify-content-center">
           {props.movies &&
             props.movies.map((movie) => (
               <Row>
-                <Col xs={8} sm={8} md={6} key={movie.imdbID}>
+                <Col key={movie.imdbID}>
                   <MovieCard movie={movie} />
                 </Col>
               </Row>
