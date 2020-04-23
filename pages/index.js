@@ -67,7 +67,7 @@ export default class Index extends React.Component {
           <Search onChange={this.onChange} searchMovies={this.searchMovies} />
           <Movies movies={[...movieStore.searchResult]}></Movies>
           {movieStore.searchResult.length !== 0 ? (
-            <Container>
+            <Container className="mb-3">
               <Row className="d-flex justify-content-between">
                 <Arrow>
                   <Button disabled={page === 1} onClick={this.onLeft}>
