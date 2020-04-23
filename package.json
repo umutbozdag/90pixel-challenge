@@ -9,11 +9,12 @@
     "isomorphic-unfetch": "^3.0.0",
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
-    "movie-trailer": "^2.0.6",
     "next": "latest",
+    "next-i18next": "^4.3.0",
     "react": "^16.7.0",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.7.0",
+    "react-toastify": "^5.5.0",
     "sass": "1.26.3"
   },
   "devDependencies": {
