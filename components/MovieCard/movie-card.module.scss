@@ -9,6 +9,7 @@ $gray: gray;
   height: 600px;
   box-shadow: 2px 2px 18px 1px rgba(0, 0, 0, 0.2);
   position: relative;
+  margin-left: 24px;
   &:hover {
     transform: scale(1.01);
     transition: all 0.2s ease;
@@ -69,7 +70,7 @@ $gray: gray;
   outline: none;
   i {
     color: red;
-    font-size: 18px;
+    font-size: 24px;
     outline: none;
   }
 }

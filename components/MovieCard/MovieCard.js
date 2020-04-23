@@ -1,17 +1,20 @@
 import Link from "next/link";
 import styles from "./movie-card.module.scss";
-import { Card, Button, Container } from "react-bootstrap";
+import { Card, Button, Container, Toast } from "react-bootstrap";
 import { observer } from "mobx-react";
 import movieStore from "../../store/movieStore";
+import { toast } from "react-toastify";
 
 @observer
 export default class MovieCard extends React.Component {
   addToFav = (movie) => {
     movieStore.addToFav(movie);
+    toast.success(`${movie.title} added to the favorites!`);
   };
 
   removeFromFav = (movie) => {
     movieStore.removeFromFav(movie);
+    toast.success(`${movie.title} removed from the favorites!`);
   };
 
   ratingStyle = (rating) => {
@@ -50,6 +53,7 @@ export default class MovieCard extends React.Component {
                 </span>
               </span>
             </Card.Text>
+
             <div className="d-flex justify-content-between">
               <Link href="/movie/[id]" as={`/movie/${imdbID}`}>
                 <a>
