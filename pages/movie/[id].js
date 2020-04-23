@@ -1,7 +1,6 @@
 import fetch from "isomorphic-unfetch";
 import Nav from "../../components/Navbar/Navbar";
 import { observer } from "mobx-react";
-import movieTrailer from "movie-trailer";
 import { Container, Row, Col } from "react-bootstrap";
 import "./movie-detail.module.scss";
 import styles from "./movie-detail.module.scss";
@@ -13,55 +12,68 @@ export default class Movie extends React.Component {
   }
 
   render() {
+    const {
+      title,
+      poster,
+      genre,
+      plot,
+      rating,
+      director,
+      country,
+      type,
+      actors,
+      time,
+    } = this.props.movie;
+
     return (
       <div>
         <Nav />
-        <Container>
+        <Container className={styles.movieContainer}>
           <Row>
             <Col md={4} className="mt-5">
-              <img src={this.props.movie.poster} alt={this.props.movie.Title} />
+              <img src={poster} alt={title} />
             </Col>
             <Col sm={4} md={8} className="mt-5">
-              <h2>{this.props.movie.title}</h2>
+              <h2>{title}</h2>
               <p>
-                <span>Plot: </span> {this.props.movie.plot}
+                <span>Plot: </span> {plot}
               </p>
               <Row>
                 <Col>
                   <p>
-                    <span> Genre: </span> {this.props.movie.genre}
+                    <span> Genre: </span> {genre}
                   </p>
                 </Col>
                 <Col>
                   <p>
-                    <span> Time: </span> {this.props.movie.time}
+                    <span> Time: </span> {time}
                   </p>
                 </Col>
               </Row>
               <p>
                 <span>Rating: </span>
-                {this.props.movie.rating}
+                {rating}
               </p>
 
               <p>
                 <span>Director: </span>
-                {this.props.movie.director}
+                {director}
               </p>
 
               <p>
                 <span>Country: </span>
-                {this.props.movie.country}
+                {country}
               </p>
 
               <p>
                 <span>Type: </span>
-                {this.props.movie.type}
+                {type}
               </p>
 
               <div className={styles.actors}>
-                Actors:
-                {this.props.movie &&
-                  this.props.movie.actors.map((actor, i) => (
+                <span> Actors: </span>
+                {actors &&
+                  actors.map((actor, i) => (
                     <p className={styles.actor} key={i}>
                       {actor}
                     </p>
