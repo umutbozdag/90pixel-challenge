@@ -1,44 +1,27 @@
 import React from "react";
-import { Form, Row, Col, Button, Container } from "react-bootstrap";
+import { Form, Row, Col, Button, Container, Pagination } from "react-bootstrap";
 import movieStore from "../../store/movieStore";
 import { observer } from "mobx-react";
 import "./search.module.scss";
+import Arrow from "../Arrow/Arrow";
+
 @observer
 export default class Search extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      year: "",
-      input: "",
-      type: "movie",
-    };
   }
-  onChange = (e) => {
-    const { name, value } = e.target;
-    this.setState({
-      [name]: value,
-    });
-  };
-
-  searchMovies = async () => {
-    const { input, year, type } = this.state;
-    if (input === "") return;
-
-    console.log(input);
-    await movieStore.addToSearchList(input, year, type);
-  };
 
   render() {
     return (
       <div>
-        <Form>
+        <Form className="ml-3">
           <Row>
             <Col>
-              <Row className="text-center">
+              <Row>
                 <Col sm={4}>
                   <Form.Control
                     required
-                    onChange={this.onChange}
+                    onChange={this.props.onChange}
                     placeholder="Title"
                     name="input"
                   />
@@ -46,7 +29,7 @@ export default class Search extends React.Component {
                 <Col sm={4}>
                   <Form.Control
                     type="number"
-                    onChange={this.onChange}
+                    onChange={this.props.onChange}
                     name="year"
                     placeholder="Year"
                   />
@@ -54,7 +37,7 @@ export default class Search extends React.Component {
                 <Col sm={4}>
                   <Form.Control
                     name="type"
-                    onChange={this.onChange}
+                    onChange={this.props.onChange}
                     as="select"
                   >
                     <option name="movie" value="movie" defaultValue>
@@ -77,8 +60,8 @@ export default class Search extends React.Component {
             <Col className="text-center">
               <Button
                 size="lg"
-                className="mt-3 mb-4"
-                onClick={this.searchMovies}
+                className="mt-3 mb-5"
+                onClick={this.props.searchMovies}
               >
                 Search
               </Button>
