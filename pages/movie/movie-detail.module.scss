@@ -3,7 +3,18 @@
   .actor {
     margin-right: 12px;
     &:first-child {
-      margin-left: 8px;
+      margin-left: 12px;
     }
+  }
+}
+
+.movieContainer {
+  span {
+    font-weight: 600;
+    background: yellow;
+    padding: 4px;
+    border-radius: 4px;
+    margin-right: 4px;
+    text-align: center;
   }
 }
