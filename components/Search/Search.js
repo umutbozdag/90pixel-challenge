@@ -14,7 +14,7 @@ export default class Search extends React.Component {
   render() {
     return (
       <div>
-        <Form className="ml-3">
+        <Form onKeyPress={this.props.handleKeyPress} className="ml-3">
           <Row>
             <Col>
               <Row>
