@@ -23,6 +23,7 @@ export default class Movie extends React.Component {
       type,
       actors,
       time,
+      language,
     } = this.props.movie;
 
     return (
@@ -30,10 +31,18 @@ export default class Movie extends React.Component {
         <Nav />
         <Container className={styles.movieContainer}>
           <Row>
-            <Col md={4} className="mt-5">
-              <img src={poster} alt={title} />
+            <Col lg={5} sm={6} md={7} className="mt-5">
+              <img
+                src={
+                  poster !== "N/A"
+                    ? poster
+                    : "https://748073e22e8db794416a-cc51ef6b37841580002827d4d94d19b6.ssl.cf3.rackcdn.com/not-found.png"
+                }
+                className={styles.detailPoster}
+                alt={title}
+              />
             </Col>
-            <Col sm={4} md={8} className="mt-5">
+            <Col lg={7} sm={6} md={6} className="mt-5">
               <h2>{title}</h2>
               <p>
                 <span>Plot: </span> {plot}
@@ -78,16 +87,22 @@ export default class Movie extends React.Component {
                   </p>
                 </Col>
               </Row>
-
-              <div className={styles.actors}>
-                <span> Actors: </span>
-                {actors &&
-                  actors.map((actor, i) => (
-                    <p className={styles.actor} key={i}>
-                      {actor}
-                    </p>
-                  ))}
-              </div>
+              <Row>
+                <Col>
+                  <div>
+                    <span> Actors: </span>
+                    {actors}
+                  </div>
+                </Col>
+              </Row>
+              <Row className="mt-3">
+                <Col>
+                  <p>
+                    <span>Language: </span>
+                    {language}
+                  </p>
+                </Col>
+              </Row>
             </Col>
           </Row>
         </Container>
@@ -110,12 +125,13 @@ Movie.getInitialProps = async ({ query }) => {
         rating: result.imdbRating,
         type: result.Type,
         genre: result.Genre,
-        actors: result.Actors.split(", "),
+        actors: result.Actors,
         poster: result.Poster,
         plot: result.Plot,
         director: result.Director,
         country: result.Country,
       };
+      console.log(result);
       return movieDetail;
     });
   return { movie: singleMovie };
