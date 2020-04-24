@@ -1,7 +1,7 @@
 import fetch from "isomorphic-unfetch";
 import Movies from "../components/Movies/Movies";
 import Search from "../components/Search/Search";
-import { Container, Button, Row, Col } from "react-bootstrap";
+import { Container, Button, Row } from "react-bootstrap";
 import movieStore from "../store/movieStore";
 import { observer } from "mobx-react";
 import Nav from "../components/Navbar/Navbar";

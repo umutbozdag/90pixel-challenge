@@ -1,6 +1,6 @@
 import Link from "next/link";
 import styles from "./movie-card.module.scss";
-import { Card, Button, Container, Toast } from "react-bootstrap";
+import { Card, Button, Container } from "react-bootstrap";
 import { observer } from "mobx-react";
 import movieStore from "../../store/movieStore";
 import { toast } from "react-toastify";

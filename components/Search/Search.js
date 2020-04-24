@@ -1,9 +1,8 @@
 import React from "react";
-import { Form, Row, Col, Button, Container, Pagination } from "react-bootstrap";
-import movieStore from "../../store/movieStore";
+import { Form, Row, Col, Button, Container } from "react-bootstrap";
 import { observer } from "mobx-react";
 import "./search.module.scss";
-import Arrow from "../Arrow/Arrow";
+import styles from "./search.module.scss";
 
 @observer
 export default class Search extends React.Component {
@@ -24,6 +23,7 @@ export default class Search extends React.Component {
                     onChange={this.props.onChange}
                     placeholder="Title"
                     name="input"
+                    className={styles.formControl}
                   />
                 </Col>
                 <Col sm={4}>
@@ -32,6 +32,7 @@ export default class Search extends React.Component {
                     onChange={this.props.onChange}
                     name="year"
                     placeholder="Year"
+                    className={styles.formControl}
                   />
                 </Col>
                 <Col sm={4}>
@@ -39,6 +40,7 @@ export default class Search extends React.Component {
                     name="type"
                     onChange={this.props.onChange}
                     as="select"
+                    className={styles.formControl}
                   >
                     <option name="movie" value="movie" defaultValue>
                       Movie
@@ -60,7 +62,7 @@ export default class Search extends React.Component {
             <Col className="text-center">
               <Button
                 size="lg"
-                className="mt-4 mb-5"
+                className="mt-3 mb-5"
                 onClick={this.props.searchMovies}
               >
                 Search
