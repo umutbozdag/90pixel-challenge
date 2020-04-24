@@ -60,7 +60,7 @@ export default class Search extends React.Component {
             <Col className="text-center">
               <Button
                 size="lg"
-                className="mt-3 mb-5"
+                className="mt-4 mb-5"
                 onClick={this.props.searchMovies}
               >
                 Search
