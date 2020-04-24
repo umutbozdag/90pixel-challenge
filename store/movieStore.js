@@ -23,6 +23,9 @@ class MovieStore {
     return this.loading;
   }
 
+  @computed get getError() {
+    return this.error;
+  }
   pushItemToSearchList = (item) => this.searchResult.push(item);
 
   setSearchResult = (payload) => (this.searchResult = payload);
@@ -59,17 +62,18 @@ class MovieStore {
         if (result.Response === "False") {
           this.setError(result.Error);
           this.setLoading(false);
-          return;
+          this.setSearchResult([]);
         }
-        this.totalResult = result.totalResults;
-        console.log(result);
+        this.setTotalResult(result.totalResults);
         return result;
       })
-      .then((result) => {
-        result.Search.forEach((movie) => {
+      .then((resultData) => {
+        if (!resultData.Search) return;
+        resultData.Search.forEach((movie) => {
           fetch(`https://www.omdbapi.com/?i=${movie.imdbID}&apikey=${API_KEY}`)
             .then((res) => res.json())
             .then((result) => {
+              let favorites = JSON.parse(localStorage.getItem("favorites"));
               this.searchResult.push({
                 title: result.Title,
                 year: result.Year,
@@ -84,6 +88,7 @@ class MovieStore {
             });
         });
         this.setLoading(false);
+        this.setError("");
       })
       .catch((err) => {
         console.log(err);
