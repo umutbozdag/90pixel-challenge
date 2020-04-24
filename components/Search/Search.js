@@ -16,7 +16,7 @@ export default class Search extends React.Component {
         <Form onKeyPress={this.props.handleKeyPress} className="ml-3">
           <Row>
             <Col>
-              <Row>
+              <Row className="d-flex justify-content-center text-center">
                 <Col sm={4}>
                   <Form.Control
                     required
