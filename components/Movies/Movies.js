@@ -1,9 +1,10 @@
 import MovieCard from "../MovieCard/MovieCard";
-import { Container, Row, Col, Spinner, CardDeck, Toast } from "react-bootstrap";
+import { Container, Row, Col } from "react-bootstrap";
 import movieStore from "../../store/movieStore";
-import { useState } from "react";
 import MovieCardSkeleton from "../MovieCardSkeleton/MovieCardSkeleton";
+import { toast } from "react-toastify";
 
+toast.configure();
 export default function Movies(props) {
   return (
     <Row>
@@ -23,7 +24,7 @@ export default function Movies(props) {
       <Container>
         <Row>
           <Col className="text-center">
-            {movieStore.error ? <p>{movieStore.error}</p> : ""}
+            {movieStore.getError ? movieStore.getError : ""}
           </Col>
         </Row>
       </Container>
@@ -33,7 +34,7 @@ export default function Movies(props) {
             props.movies.map((movie) => (
               <Row>
                 <Col key={movie.imdbID}>
-                  <MovieCard movie={movie} />
+                  <MovieCard key={movie.imdbID} movie={movie} />
                 </Col>
               </Row>
             ))}
