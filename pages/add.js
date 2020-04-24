@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { observer } from "mobx-react";
-import { Container, Col, Row, Form, Button } from "react-bootstrap";
+import { Container, Col, Form, Button } from "react-bootstrap";
 import Nav from "../components/Navbar/Navbar";
 @observer
 export default class add extends Component {
@@ -8,9 +8,9 @@ export default class add extends Component {
     super(props);
     this.state = {};
   }
+
   onSubmit = (e) => {
     e.preventDefault();
-    console.log("HELLo");
   };
 
   onChange = (e) => {

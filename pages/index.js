@@ -25,6 +25,12 @@ export default class Index extends React.Component {
     });
   };
 
+  handleKeyPress = (e) => {
+    if (e.key === "Enter") {
+      this.searchMovies();
+    }
+  };
+
   searchMovies = async () => {
     const { input, year, type, page } = this.state;
     if (input === "") return;
@@ -49,9 +55,8 @@ export default class Index extends React.Component {
   };
 
   render() {
-    const { input, year, type, page } = this.state;
+    const { page } = this.state;
     const pageCount = Math.ceil(movieStore.getTotalResult / 10);
-    console.log("count", pageCount);
     return (
       <div className="app">
         <Nav />
@@ -59,13 +64,18 @@ export default class Index extends React.Component {
           <h1 className="mt-4 mb-5 text-center">
             Explore Movies, Series, Episodes
           </h1>
-          <Search onChange={this.onChange} searchMovies={this.searchMovies} />
+          <Search
+            handleKeyPress={this.handleKeyPress}
+            onChange={this.onChange}
+            searchMovies={this.searchMovies}
+          />
           <Movies movies={[...movieStore.searchResult]}></Movies>
           {movieStore.searchResult.length !== 0 ? (
             <Container className="mb-3">
               <Row className="d-flex justify-content-between">
                 <Arrow>
                   <Button
+                    className="arrow-left"
                     name="buttonLeft"
                     disabled={page === 1}
                     onClick={this.onPageChange}
@@ -75,6 +85,7 @@ export default class Index extends React.Component {
                 </Arrow>
                 <Arrow>
                   <Button
+                    className="arrow-right"
                     name="buttonRight"
                     disabled={movieStore.totalResult < 10 || pageCount === page}
                     onClick={this.onPageChange}

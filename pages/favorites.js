@@ -12,7 +12,6 @@ export default class Favorites extends React.Component {
   }
   componentDidMount() {
     movieStore.favorites = JSON.parse(localStorage.getItem("favorites"));
-    console.log([...movieStore.favorites]);
   }
   render() {
     return (
