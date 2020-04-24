@@ -10,7 +10,6 @@
     "mobx": "^5.15.4",
     "mobx-react": "^6.2.2",
     "next": "latest",
-    "next-i18next": "^4.3.0",
     "react": "^16.7.0",
     "react-bootstrap": "^1.0.0",
     "react-dom": "^16.7.0",
