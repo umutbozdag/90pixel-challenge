@@ -39,7 +39,7 @@ export default function Movies(props) {
         <Row className="d-flex justify-content-center">
           {props.movies &&
             props.movies.map((movie) => (
-              <Row>
+              <Row noGutters={true}>
                 <Col key={movie.imdbID}>
                   <MovieCard key={movie.imdbID} movie={movie} />
                 </Col>
