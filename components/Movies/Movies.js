@@ -2,8 +2,8 @@ import MovieCard from "../MovieCard/MovieCard";
 import { Container, Row, Col } from "react-bootstrap";
 import movieStore from "../../store/movieStore";
 import MovieCardSkeleton from "../MovieCardSkeleton/MovieCardSkeleton";
-import { toast } from "react-toastify";
-
+import { toast, ToastContainer } from "react-toastify";
+import styles from "./movies.module.scss";
 toast.configure();
 export default function Movies(props) {
   return (
@@ -24,7 +24,14 @@ export default function Movies(props) {
       <Container>
         <Row>
           <Col className="text-center">
-            {movieStore.getError ? movieStore.getError : ""}
+            {movieStore.getError ? (
+              <span className={styles.error}>
+                {movieStore.getError} Try again.
+              </span>
+            ) : (
+              ""
+            )}
+            <ToastContainer />
           </Col>
         </Row>
       </Container>
