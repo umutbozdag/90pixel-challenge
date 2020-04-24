@@ -1,18 +1,21 @@
-.actors {
-  display: flex;
-  .actor {
-    margin-right: 12px;
-    &:first-child {
-      margin-left: 12px;
-    }
-  }
-}
-
 .movieContainer {
   span {
     font-weight: 600;
     border-radius: 4px;
     margin-right: 4px;
     text-align: center;
+  }
+
+  .detailPoster {
+    width: 350px;
+    height: 500px;
+    object-fit: cover;
+  }
+}
+
+@media only screen and (max-width: 320px) {
+  .detailPoster {
+    width: 290px !important;
+    height: 350px !important;
   }
 }
