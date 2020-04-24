@@ -1,5 +1,6 @@
 import { computed, observable, action } from "mobx";
 import { API_KEY } from "../service/api";
+import { toast } from "react-toastify";
 class MovieStore {
   @observable searchResult = [];
   @observable favorites = [];
@@ -63,6 +64,7 @@ class MovieStore {
           this.setError(result.Error);
           this.setLoading(false);
           this.setSearchResult([]);
+          toast.error(`${this.getError} Try again.`);
         }
         this.setTotalResult(result.totalResults);
         return result;
@@ -91,7 +93,6 @@ class MovieStore {
         this.setError("");
       })
       .catch((err) => {
-        console.log(err);
         this.setError(err);
       });
   };
