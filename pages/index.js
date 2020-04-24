@@ -56,12 +56,12 @@ export default class Index extends React.Component {
 
   render() {
     const { page } = this.state;
-    const pageCount = Math.ceil(movieStore.getTotalResult / 10);
+    const pageCount = Math.floor(movieStore.getTotalResult / 10);
     return (
       <div className="app">
         <Nav />
         <Container>
-          <h1 className="mt-4 mb-5 text-center">
+          <h1 className="mt-5 mb-5 text-center">
             Explore Movies, Series, Episodes
           </h1>
           <Search
