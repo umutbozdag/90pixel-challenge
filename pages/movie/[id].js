@@ -50,25 +50,34 @@ export default class Movie extends React.Component {
                   </p>
                 </Col>
               </Row>
-              <p>
-                <span>Rating: </span>
-                {rating}
-              </p>
-
-              <p>
-                <span>Director: </span>
-                {director}
-              </p>
-
-              <p>
-                <span>Country: </span>
-                {country}
-              </p>
-
-              <p>
-                <span>Type: </span>
-                {type}
-              </p>
+              <Row>
+                <Col>
+                  <p>
+                    <span>Rating: </span>
+                    {rating}
+                  </p>
+                </Col>
+                <Col>
+                  <p>
+                    <span>Director: </span>
+                    {director}
+                  </p>
+                </Col>
+              </Row>
+              <Row>
+                <Col>
+                  <p>
+                    <span>Country: </span>
+                    {country}
+                  </p>
+                </Col>
+                <Col>
+                  <p>
+                    <span>Type: </span>
+                    {type}
+                  </p>
+                </Col>
+              </Row>
 
               <div className={styles.actors}>
                 <span> Actors: </span>
@@ -93,7 +102,6 @@ Movie.getInitialProps = async ({ query }) => {
   )
     .then((res) => res.json())
     .then((result) => {
-      console.log(result);
       const movieDetail = {
         title: result.Title,
         year: result.Year,
@@ -110,6 +118,5 @@ Movie.getInitialProps = async ({ query }) => {
       };
       return movieDetail;
     });
-  //   let trailer = await movieTrailer(singleMovie.Title).then((result) => result);
   return { movie: singleMovie };
 };
