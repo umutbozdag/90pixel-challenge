@@ -29,28 +29,23 @@ export default class Index extends React.Component {
     const { input, year, type, page } = this.state;
     if (input === "") return;
     this.setState({ page: 1 });
-    console.log(page);
 
     await movieStore.addToSearchList(input, year, type, page);
   };
 
-  onLeft = () => {
-    const paginationCount = Math.round(movieStore.getTotalResult);
-    console.log(paginationCount);
-    this.setState({ page: this.state.page - 1 }, () => {
-      const { input, year, type, page } = this.state;
-      movieStore.addToSearchList(input, year, type, page);
-    });
-  };
-
-  onRight = () => {
-    const paginationCount = Math.round(movieStore.getTotalResult);
-    console.log(paginationCount);
-
-    this.setState({ page: this.state.page + 1 }, () => {
-      const { input, year, type, page } = this.state;
-      movieStore.addToSearchList(input, year, type, page);
-    });
+  onPageChange = (e) => {
+    const { name } = e.target;
+    if (name === "buttonLeft") {
+      this.setState({ page: this.state.page - 1 }, () => {
+        const { input, year, type, page } = this.state;
+        movieStore.addToSearchList(input, year, type, page);
+      });
+    } else {
+      this.setState({ page: this.state.page + 1 }, () => {
+        const { input, year, type, page } = this.state;
+        movieStore.addToSearchList(input, year, type, page);
+      });
+    }
   };
 
   render() {
@@ -70,14 +65,19 @@ export default class Index extends React.Component {
             <Container className="mb-3">
               <Row className="d-flex justify-content-between">
                 <Arrow>
-                  <Button disabled={page === 1} onClick={this.onLeft}>
+                  <Button
+                    name="buttonLeft"
+                    disabled={page === 1}
+                    onClick={this.onPageChange}
+                  >
                     <i className="fas fa-arrow-left"></i>
                   </Button>
                 </Arrow>
                 <Arrow>
                   <Button
+                    name="buttonRight"
                     disabled={movieStore.totalResult < 10 || pageCount === page}
-                    onClick={this.onRight}
+                    onClick={this.onPageChange}
                   >
                     <i className="fas fa-arrow-right"></i>
                   </Button>
