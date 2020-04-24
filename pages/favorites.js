@@ -21,15 +21,7 @@ export default class Favorites extends React.Component {
           <CommonTitle>
             <h1 className="text-center mt-5">Your Favorites</h1>
           </CommonTitle>
-          <h6 className="mt-4 text-center">
-            <small> Couldn't you find the thing you are looking for? </small>
-            <Link href="/add">
-              <a>
-                <small>Add it yourself! </small>
-              </a>
-            </Link>
-          </h6>
-          <h3 className="mt-4 mb-4"></h3>
+          <h3 className="mt-3 mb-5"></h3>
           <Movies movies={[...movieStore.favorites]} />
         </Container>
       </>
